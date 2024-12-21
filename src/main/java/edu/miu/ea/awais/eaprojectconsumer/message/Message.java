@@ -1,9 +1,17 @@
-package edu.miu.ea.awais.eaprojectconsumer.jms;
+package edu.miu.ea.awais.eaprojectconsumer.message;
 
-import java.util.HashMap;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Map;
 
+@Entity
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long emId;
     private Long eventId;
     private String eventName;
     private Long ticketId;
@@ -11,14 +19,6 @@ public class Message {
     private String customerEmail;
 
     public Message() {
-    }
-
-    public Message(Long eventId, String eventName, Long ticketId, Long customerId, String customerEmail) {
-        this.eventId = eventId;
-        this.eventName = eventName;
-        this.ticketId = ticketId;
-        this.customerId = customerId;
-        this.customerEmail = customerEmail;
     }
 
     public static Message fromMap(Map<String, ?> map) {
@@ -44,6 +44,7 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
+                "id=" + emId +
                 "eventId=" + eventId +
                 ", eventName='" + eventName + '\'' +
                 ", ticketId=" + ticketId +
@@ -90,5 +91,9 @@ public class Message {
 
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public long getId() {
+        return emId;
     }
 }
